@@ -1,0 +1,23 @@
+<section>
+    <h2>Мини-игра</h2>
+
+    <p><b>Это место, где живут люди</b></p>
+
+    <input type="text" id="answer">
+    <button onclick="check()">Проверить</button>
+
+    <p id="result"></p>
+</section>
+
+<script>
+function check() {
+    const val = document.getElementById("answer").value.toLowerCase();
+    const res = document.getElementById("result");
+
+    if (val === "дом") {
+        res.innerHTML = "✅ Правильно!";
+    } else {
+        res.innerHTML = "❌ Попробуй ещё";
+    }
+}
+</script>

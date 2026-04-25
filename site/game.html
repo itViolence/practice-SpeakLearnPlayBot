@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Ресурсы</title>
+    <title>Игра</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -28,18 +28,28 @@
 
 <main>
 <section>
-    <h2>Полезные ресурсы</h2>
+    <h2>Мини-игра</h2>
 
-    <div class="card">
-        <ul>
-            <li><a href="https://aiogram.dev">Aiogram — для разработки ботов</a></li>
-            <li>Материалы по изучению русского языка предоставленные преподавателем.</li>
-            <li><a href="https://docs.python.org/3/">Документация Python</a></li>
-            <li><a href="https://sky.pro/wiki/python/razrabotka-interaktivnogo-menyu-dlya-botov-na-python/">Учебные статьи по UX и обучающим системам</a></li>
-        </ul>
-    </div>
+    <p><b>Это место, где живут люди</b></p>
 
+    <input type="text" id="answer">
+    <button onclick="check()">Проверить</button>
+
+    <p id="result"></p>
 </section>
+
+<script>
+function check() {
+    const val = document.getElementById("answer").value.toLowerCase();
+    const res = document.getElementById("result");
+
+    if (val === "дом") {
+        res.innerHTML = "✅ Правильно!";
+    } else {
+        res.innerHTML = "❌ Попробуй ещё";
+    }
+}
+</script>
 </main>
 
 <footer>
