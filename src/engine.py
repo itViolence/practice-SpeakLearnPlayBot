@@ -20,7 +20,11 @@ def load(path):
     with open(path, encoding="utf-8") as f:
         return f.read()
 
-# шаблоны
+def render(template, context):
+    for key, value in context.items():
+        template = template.replace("{{" + key + "}}", value)
+    return template
+
 base = load(os.path.join(TEMPLATES_DIR, "base.html"))
 header = load(os.path.join(TEMPLATES_DIR, "header.html"))
 nav = load(os.path.join(TEMPLATES_DIR, "nav.html"))
@@ -29,8 +33,13 @@ footer = load(os.path.join(TEMPLATES_DIR, "footer.html"))
 for filename, title in PAGES:
     content = load(os.path.join(DATA_DIR, filename))
 
-    page = base
-    page = page.replace("{{title}}", title)
+    context = {
+        "title": title,
+        "year": "2026"
+    }
+
+    page = render(base, context)
+
     page = page.replace("{{header}}", header)
     page = page.replace("{{nav}}", nav)
     page = page.replace("{{footer}}", footer)
