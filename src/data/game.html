@@ -1,23 +1,83 @@
 <section>
-    <h2>Мини-игра</h2>
+    <h2>Мини-игра: Угадай слово</h2>
 
-    <p><b>Это место, где живут люди</b></p>
+    <p id="question"><b>Вопрос</b></p>
 
     <input type="text" id="answer">
-    <button onclick="check()">Проверить</button>
+
+    <div style="margin-top: 10px;">
+        <button id="btn" onclick="next()">Далее</button>
+        <button id="restart" onclick="restart()" style="display:none;">Пройти ещё раз</button>
+    </div>
 
     <p id="result"></p>
 </section>
 
 <script>
-function check() {
-    const val = document.getElementById("answer").value.toLowerCase();
-    const res = document.getElementById("result");
+const questions = [
+    { q: "Это место, где живут люди", a: "дом" },
+    { q: "Жёлтый фрукт", a: "банан" },
+    { q: "Животное, которое мяукает", a: "кошка" },
+    { q: "Животное, которое лает", a: "собака" },
+    { q: "На чём мы сидим в школе", a: "стул" }
+];
 
-    if (val === "дом") {
-        res.innerHTML = "✅ Правильно!";
+let index = 0;
+let score = 0;
+
+function showQuestion() {
+    document.getElementById("question").innerHTML =
+        "<b>" + (index + 1) + ". " + questions[index].q + "</b>";
+
+    document.getElementById("answer").value = "";
+}
+
+function next() {
+    const user = document.getElementById("answer").value.toLowerCase().trim();
+
+    if (user === questions[index].a) {
+        score++;
+    }
+
+    index++;
+
+    if (index < questions.length) {
+        showQuestion();
     } else {
-        res.innerHTML = "❌ Попробуй ещё";
+        finish();
     }
 }
+
+function finish() {
+    document.getElementById("question").innerHTML = "Игра завершена";
+
+    document.getElementById("answer").style.display = "none";
+    document.getElementById("btn").style.display = "none";
+
+    document.getElementById("result").innerHTML =
+        "Ваш результат: " + score + "/" + questions.length;
+
+    if (score >= 4) {
+        document.getElementById("result").innerHTML += "<br>✅ ЗАЧЁТ";
+    } else {
+        document.getElementById("result").innerHTML += "<br>❌ НЕ ЗАЧЁТ";
+    }
+
+    document.getElementById("restart").style.display = "inline-block";
+}
+
+function restart() {
+    index = 0;
+    score = 0;
+
+    document.getElementById("answer").style.display = "inline-block";
+    document.getElementById("btn").style.display = "inline-block";
+    document.getElementById("restart").style.display = "none";
+
+    document.getElementById("result").innerHTML = "";
+
+    showQuestion();
+}
+
+showQuestion();
 </script>
