@@ -14,6 +14,7 @@ PAGES = [
     ("partner.html", "Партнёр"),
     ("resources.html", "Ресурсы"),
     ("game.html", "Игра"),
+    ("report.html", "Отчёт")
 ]
 
 def load(path):
